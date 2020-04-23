@@ -5,15 +5,34 @@
 import twint
 import os
 from usernames import *
+import shutil
+import os
+
+current_folder_path = os.path.abspath(os.getcwd())
+csv_foldername = 'usercsv'
 
 def fetchUserdata(username):
     c = twint.Config()
     c.Username = username
     c.Limit = 10
     c.Store_csv = True
-    current_folder_path = os.path.abspath(os.getcwd())
     c.Output = os.path.join(current_folder_path, f"{username}.csv")
     twint.run.Search(c)
 
-for idx, username in enumerate(twitterUsernames):
-    fetchUserdata(username)
+def moveCSVfiles():
+    # Twint saves all csv files in the same folder, so move all of them to usercsv/
+    # todo: Find out why Twint doesn save to absolute path and remove the need for this step 
+    files = os.listdir(current_folder_path)
+    destfolder = os.path.join(current_folder_path,csv_foldername)
+    for f in files:
+        if (f.endswith('.csv')):
+            shutil.move(os.path.join(current_folder_path,f), os.path.join(destfolder,f))
+
+if __name__=='__main__':
+    # Fetch csv data and save
+    for idx, username in enumerate(twitterUsernames):
+        fetchUserdata(username)
+    # move csv files to usercsv folder
+    moveCSVfiles()
+
+
