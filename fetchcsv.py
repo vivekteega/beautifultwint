@@ -26,7 +26,7 @@ def moveCSVfiles():
     destfolder = os.path.join(current_folder_path,csv_foldername)
     
     if not os.path.isdir(destfolder):
-        os.path.mkdir(destfolder)
+        os.mkdir(destfolder)
         
     for f in files:
         if (f.endswith('.csv')):
