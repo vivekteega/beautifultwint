@@ -1,2 +1,5 @@
 *.csv
 node_modules
+__pycache__/*
+*.pyc
+__pycache__/usernames.cpython-37.pyc
