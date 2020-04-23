@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <title>Twitter user info</title>
+  </head>
+
+  <script>
+
+
+    body {
+    	font-family: 'open sans', sans-serif;
+    	font-size: 10pt;
+    }
+
+    table {
+    	width: 100%;
+    	tr {
+    		th {
+    			background: #162941;
+    			color: white;
+    			text-align: left;
+    		}
+
+    		td {
+    			overflow: hidden;
+    			text-overflow: ellipsis;
+    			max-width: 200px;
+    			white-space: nowrap;
+    		}
+
+    	}
+
+    	tr:nth-child(odd) {
+    		background-color: rgba(171,206,227, .3);
+    	}
+
+    	tr:hover {
+    		background-color: rgba(171,206,227, 1);
+    	}
+
+    	th,td {
+    		padding: .5rem;
+    	}
+
+
+    }
+
+
+    @media screen and (max-width: 700px) {
+    	table {
+
+    		th {
+    			display: none;
+    		}
+
+    		tr {
+    			display: grid;
+    			grid-template-columns: auto auto;
+    			grid-template-areas:
+    				"top-left top-right"
+    				"bottom-left bottom-right";
+
+    			td:first-child {
+    				font-size: 1em;
+    			}
+
+    			td {
+    				padding: .1rem;
+    				max-width: 100%;
+    				overflow: hidden;
+    			}
+
+    			td:nth-child(3), td:nth-child(4) {
+    				text-align: right;
+    			}
+
+    			td.name {
+    				grid-area: top-left;
+    			}
+
+    			td.company {
+    				grid-area: bottom-left;
+    			}
+
+    			td.phone {
+    				grid-area: top-right;
+    			}
+
+    			td.email {
+    				grid-area: bottom-right;
+    			}
+    		}
+    	}
+    }
+  </script>
+
+  <body>
+    <h1>Twitter Users</h1>
+    {% for table in tables %} {{titles[loop.index]}} {{ table|safe }} {% endfor
+    %}
+  </body>
+</html>
