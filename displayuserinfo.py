@@ -1,4 +1,6 @@
 from flask import Flask
+import pandas
+
 app = Flask(__name__)
 
 @app.route('/')
