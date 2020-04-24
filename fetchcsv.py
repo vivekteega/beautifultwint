@@ -24,6 +24,10 @@ def moveCSVfiles():
     # todo: Find out why Twint doesn save to absolute path and remove the need for this step 
     files = os.listdir(current_folder_path)
     destfolder = os.path.join(current_folder_path,csv_foldername)
+    
+    if not os.path.isdir(destfolder):
+        os.mkdir(destfolder)
+        
     for f in files:
         if (f.endswith('.csv')):
             shutil.move(os.path.join(current_folder_path,f), os.path.join(destfolder,f))
