@@ -14,11 +14,11 @@ def homepage():
     # read user files and display likes and tweet
     newdf = pd.DataFrame()
     for idx, filename in enumerate(files):
-        userdata = pd.read_csv(os.path.join(csv_folderpath,filename), usecols=['username','likes_count','tweet','time'])
+        userdata = pd.read_csv(os.path.join(csv_folderpath,filename), usecols=['username','likes_count','tweet','time','date'])
         newdf = newdf.append(userdata.loc[0])
-    newdf = newdf[['username','time','likes_count','tweet']]
+    newdf = newdf[['username','date','time','likes_count','tweet']]
     return render_template('index.html',  tables=[newdf.to_html(classes='data', index=False)], titles=newdf.columns.values)
 
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0', port='8042')
